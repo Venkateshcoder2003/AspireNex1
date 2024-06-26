@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import QuizCreator from './components/QuizCreator';
+import QuizTaker from './components/QuizTaker';
+import './styles/App.css';
 
 function App() {
+  const [quizzes, setQuizzes] = useState([]);
+
+  const addQuiz = (quiz) => {
+    setQuizzes([...quizzes, quiz]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Quiz App</h1>
+      <QuizCreator addQuiz={addQuiz} />
+      {quizzes.map((quiz, index) => (
+        <QuizTaker key={index} quiz={quiz} />
+      ))}
     </div>
   );
 }
